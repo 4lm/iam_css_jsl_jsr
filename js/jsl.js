@@ -1,4 +1,4 @@
-"use strict;"
+"use strict";
 /**
  * Created by master on 01.03.16.
  */
@@ -45,7 +45,7 @@ function initialiseView() {
     }
 
     function getLiTitle(li) {
-        li.getElementsByTagName("h2")[0].textContent;
+        return li.getElementsByTagName("h2")[0].textContent;
     }
 
     // Add new elements
@@ -63,6 +63,13 @@ function initialiseView() {
         li.querySelector("h2").textContent = obj.title;
         ul.appendChild(li);
     }
+
+    xhr("GET", "data/listitems.json", null, function(xhrobj) {
+        const items = JSON.parse(xhrobj.responseText);
+        items.forEach(element => {
+            addLiElementToList(element);
+        });
+    });
 }
 
 window.onload = initialiseView;
