@@ -8,6 +8,7 @@ function initialiseView() {
     const refresh = document.querySelector("footer .refresh-button");
     let ul = main.getElementsByTagName("ul")[0];
     const add = header.querySelector(".add-button");
+    const litemplate = document.querySelector("main ul template");
 
     // Switching views
     header.onclick = () => {
@@ -57,9 +58,10 @@ function initialiseView() {
     }
 
     function addLiElementToList(obj) {
-        console.log("add new element for: " + JSON.stringify(obj));
-
-        ul.innerHTML = ul.innerHTML + "<li><img class=\"align-left\" src=\"" + obj.src + "\"><h2>" + obj.title + "</h2><button class=\"imgbutton align-right edit-button\"></button></li>\""
+        const li = document.importNode(litemplate.content, true);
+        li.querySelector("img").src = obj.src;
+        li.querySelector("h2").textContent = obj.title;
+        ul.appendChild(li);
     }
 }
 
